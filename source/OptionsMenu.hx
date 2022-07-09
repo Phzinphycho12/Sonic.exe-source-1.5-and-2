@@ -41,6 +41,7 @@ class OptionsMenu extends MusicBeatState
 			new LowQuality('Removes parts of the stage in order to achieve smoother gameplay.')
 		]),
 		new OptionCategory("Gameplay", [
+		    new AndroidControls(),
 			new DFJKOption(controls),
 			new DownscrollOption("Change the layout of the strumline."),
 			new MiddlescrollOption("Sets the strumline to the middle of the screen and hides the opponent's."),
@@ -130,7 +131,9 @@ class OptionsMenu extends MusicBeatState
 
 		FlxTween.tween(versionShit,{y: FlxG.height - 18},2,{ease: FlxEase.elasticInOut});
 		FlxTween.tween(blackBorder,{y: FlxG.height - 18},2, {ease: FlxEase.elasticInOut});
-
+                #if android
+		addVirtualPad(FULL, A_B);
+		#end
 		super.create();
 	}
 
