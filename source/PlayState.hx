@@ -1938,6 +1938,18 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
+			
+			if (curSong == 'chaos') {
+		    addVirtualPad(NONE, A);
+		}
+		
+		if (curSong == 'triple-trouble') {
+		    addVirtualPad(NONE, A);
+		}			
+					
+                #if android
+		addAndroidControls();
+	        #end
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -2057,7 +2069,7 @@ class PlayState extends MusicBeatState
 					});
 				/*
 					case: 'cant-run':
-						var video:MP4Handler = new MP4Handler();
+						//var video:MP4Handler = new MP4Handler();
 
 						video.playMP4(Paths.video('sonic1'), function()
 					   					{
@@ -5057,7 +5069,7 @@ class PlayState extends MusicBeatState
 
 					if (curSong == 'triple-trouble')
 					{
-						var video:MP4Handler = new MP4Handler();
+						//var video:MP4Handler = new MP4Handler();
 						video.playMP4(Paths.video('soundtestcodes'));
 						video.finishCallback = function()
 						{
@@ -5078,9 +5090,10 @@ class PlayState extends MusicBeatState
 					// if ()
 
 					if (SONG.validScore)
-					{
+					{       #if newgrounds
 						NGio.unlockMedal(60961);
 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
+					        #end
 					}
 
 					FlxG.save.flush();
@@ -5138,7 +5151,7 @@ class PlayState extends MusicBeatState
 					{
 						FlxG.save.data.storyProgress = 2;
 						FlxG.save.data.soundTestUnlocked = true;
-						var video:MP4Handler = new MP4Handler();
+						//var video:MP4Handler = new MP4Handler();
 						video.playMP4(Paths.video('youcantruncutscene2'));
 						video.finishCallback = function()
 						{
@@ -5182,21 +5195,21 @@ class PlayState extends MusicBeatState
 							FlxG.switchState(new FreeplayState());
 						}
 					case 'too-slow':
-						var video:MP4Handler = new MP4Handler();
+						//var video:MP4Handler = new MP4Handler();
 						video.playMP4(Paths.video('tooslowcutscene2'));
 						video.finishCallback = function()
 						{
 							LoadingState.loadAndSwitchState(new MainMenuState());
 						}
 					case 'you-cant-run':
-						var video:MP4Handler = new MP4Handler();
+						//var video:MP4Handler = new MP4Handler();
 						video.playMP4(Paths.video('youcantruncutscene2'));
 						video.finishCallback = function()
 						{
 							LoadingState.loadAndSwitchState(new MainMenuState());
 						}
 					case 'triple-trouble':
-						var video:MP4Handler = new MP4Handler();
+						//var video:MP4Handler = new MP4Handler();
 						video.playMP4(Paths.video('soundtestcodes'));
 						video.finishCallback = function()
 						{
