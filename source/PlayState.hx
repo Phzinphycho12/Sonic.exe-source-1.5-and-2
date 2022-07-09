@@ -2880,7 +2880,11 @@ class PlayState extends MusicBeatState
 	}
 
 	function startCountdown():Void
-	{
+	{   
+		#if android
+	        androidc.visible = true;
+	        #end
+			
 		FlxG.log.add(storyPlaylist);
 
 		ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
@@ -4993,14 +4997,7 @@ class PlayState extends MusicBeatState
 		if (isStoryMode)
 			campaignMisses = misses;
 
-		if (!loadRep)
-			rep.SaveReplay(saveNotes, saveJudge, replayAna);
-		else
-		{
-			PlayStateChangeables.botPlay = false;
-			PlayStateChangeables.scrollSpeed = 1;
-			PlayStateChangeables.useDownscroll = false;
-		}
+		
 
 		if (FlxG.save.data.fpsCap > 290)
 			(cast(Lib.current.getChildAt(0), Main)).setFPSCap(290);
@@ -5069,9 +5066,7 @@ class PlayState extends MusicBeatState
 
 					if (curSong == 'triple-trouble')
 					{
-						//var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('soundtestcodes'));
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new MainMenuState());
 						}
@@ -5136,9 +5131,7 @@ class PlayState extends MusicBeatState
 					if (curSong.toLowerCase() == 'too-slow' && storyDifficulty == 2)
 					{
 						FlxG.save.data.storyProgress = 1;
-						var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('tooslowcutscene2'));
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new PlayState());
 						}
@@ -5151,9 +5144,7 @@ class PlayState extends MusicBeatState
 					{
 						FlxG.save.data.storyProgress = 2;
 						FlxG.save.data.soundTestUnlocked = true;
-						//var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('youcantruncutscene2'));
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new PlayState());
 						}
@@ -5582,14 +5573,14 @@ class PlayState extends MusicBeatState
 			pressArray = [
 				controls.LEFT_P,
 				controls.DOWN_P,
-				controls.SPACE_P,
+				controls.UP_P,
 				controls.UP_P,
 				controls.RIGHT_P
 			];
 			releaseArray = [
 				controls.LEFT_R,
 				controls.DOWN_R,
-				controls.SPACE_R,
+				controls.UP_P,
 				controls.UP_R,
 				controls.RIGHT_R
 			];
@@ -5606,9 +5597,9 @@ class PlayState extends MusicBeatState
 			{
 				luaModchart.executeState('keyPressed', ["down"]);
 			};
-			if (controls.SPACE_P)
+			if (controls.UP_P)
 			{
-				luaModchart.executeState('keyPressed', ["space"]);
+				luaModchart.executeState('keyPressed', ["up"]);
 			};
 			if (controls.UP_P)
 			{
@@ -5635,15 +5626,8 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		var anas:Array<Ana> = [null, null, null, null];
-		if (isRing)
-		{
-			anas = [null, null, null, null, null];
-		}
-
-		for (i in 0...pressArray.length)
-			if (pressArray[i])
-				anas[i] = new Ana(Conductor.songPosition, null, false, "miss", i);
+		
+		
 
 		// HOLDS, check for sustain notes
 		if (holdArray.contains(true) && /*!boyfriend.stunned && */ generatedMusic)
@@ -5655,8 +5639,6 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		//if (KeyBinds.gamepad && !FlxG.keys.justPressed.ANY)
-		{
 			// PRESSES, check for note hits
 			if (pressArray.contains(true) && generatedMusic)
 			{
@@ -5732,9 +5714,7 @@ class PlayState extends MusicBeatState
 								mashViolations--;
 							scoreTxt.color = FlxColor.WHITE;
 							var noteDiff:Float = -(coolNote.strumTime - Conductor.songPosition);
-							anas[coolNote.noteData].hit = true;
-							anas[coolNote.noteData].hitJudge = Ratings.CalculateRating(noteDiff, Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
-							anas[coolNote.noteData].nearestNote = [coolNote.strumTime, coolNote.noteData, coolNote.sustainLength];
+							
 							goodNoteHit(coolNote);
 						}
 					}
@@ -5747,11 +5727,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if (!loadRep)
-				for (i in anas)
-					if (i != null)
-						replayAna.anaArray.push(i); // put em all there
-		}
+			
 		notes.forEachAlive(function(daNote:Note)
 		{
 			if (PlayStateChangeables.useDownscroll && daNote.y > strumLine.y || !PlayStateChangeables.useDownscroll && daNote.y < strumLine.y)
