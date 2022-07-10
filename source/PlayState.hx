@@ -5186,23 +5186,17 @@ class PlayState extends MusicBeatState
 							FlxG.switchState(new FreeplayState());
 						}
 					case 'too-slow':
-						//var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('tooslowcutscene2'));
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new MainMenuState());
 						}
 					case 'you-cant-run':
-						//var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('youcantruncutscene2'));
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new MainMenuState());
 						}
 					case 'triple-trouble':
-						//var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('soundtestcodes'));
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new MainMenuState());
 						}
@@ -5839,61 +5833,7 @@ class PlayState extends MusicBeatState
 
 	public function backgroundVideo(source:String) // for background videos
 	{
-		#if cpp
-		useVideo = true;
-
-		FlxG.stage.window.onFocusOut.add(focusOut);
-		FlxG.stage.window.onFocusIn.add(focusIn);
-
-		var ourSource:String = "assets/videos/daWeirdVid/dontDelete.webm";
-		WebmPlayer.SKIP_STEP_LIMIT = 90;
-		var str1:String = "WEBM SHIT";
-		webmHandler = new WebmHandler();
-		webmHandler.source(ourSource);
-		webmHandler.makePlayer();
-		webmHandler.webm.name = str1;
-
-		GlobalVideo.setWebm(webmHandler);
-
-		GlobalVideo.get().source(source);
-		GlobalVideo.get().clearPause();
-		if (GlobalVideo.isWebm)
-		{
-			GlobalVideo.get().updatePlayer();
-		}
-		GlobalVideo.get().show();
-
-		if (GlobalVideo.isWebm)
-		{
-			GlobalVideo.get().restart();
-		}
-		else
-		{
-			GlobalVideo.get().play();
-		}
-
-		var data = webmHandler.webm.bitmapData;
-
-		videoSprite = new FlxSprite(-470, -30).loadGraphic(data);
-
-		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.2));
-
-		remove(gf);
-		remove(boyfriend);
-		remove(dad);
-		add(videoSprite);
-		if (curStage != 'sonicFUNSTAGE')
-			add(gf);
-		add(boyfriend);
-		add(dad);
-
-		trace('poggers');
-
-		if (!songStarted)
-			webmHandler.pause();
-		else
-			webmHandler.resume();
-		#end
+		
 	}
 
 	function noteMiss(direction:Int = 1, daNote:Note):Void
