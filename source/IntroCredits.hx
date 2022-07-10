@@ -14,8 +14,7 @@ class IntroCredits extends MusicBeatState
     override function create()
     {
         
-        var video:MP4Handler = new MP4Handler();
-        video.playMP4(Paths.video('introCREDITS'), new TitleState()); 
+        
 
         
         
