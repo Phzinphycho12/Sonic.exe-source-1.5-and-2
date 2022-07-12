@@ -164,7 +164,11 @@ class StoryMenuState extends MusicBeatState
 
 		sprDifficulty.offset.x = 70;
 		sprDifficulty.y = leftArrow.y + 10;
-
+		
+                #if android
+		addVirtualPad(FULL, A_B);
+		#end
+			
 		super.create();
 	}
 
@@ -337,9 +341,7 @@ class StoryMenuState extends MusicBeatState
 					new FlxTimer().start(1, function(tmr:FlxTimer)
 					{
 						// LoadingState.loadAndSwitchState(new PlayState(), true); //save this code for the cutsceneless build of the game
-						var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('tooslowcutscene1'));
-						video.finishCallback = function()
+						
 						{
 							LoadingState.loadAndSwitchState(new PlayState());
 						}
