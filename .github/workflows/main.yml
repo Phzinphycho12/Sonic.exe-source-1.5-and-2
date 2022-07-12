@@ -184,7 +184,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install hxCodec
           haxelib git faxe https://github.com/uhrobots/faxe
-          w
+          
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git polymod https://github.com/MasterEric/polymod.git --quiet
           haxelib git extension-webview https://github.com/Daninnocent/extension-webview.git --quiet
