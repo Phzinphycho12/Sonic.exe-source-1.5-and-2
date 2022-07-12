@@ -63,9 +63,8 @@ import openfl.utils.AssetType;
 
 using StringTools;
 
-#if cpp
 
-#end
+
 #if windows
 import Discord.DiscordClient;
 #end
