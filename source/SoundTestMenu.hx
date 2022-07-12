@@ -47,7 +47,7 @@ class SoundTestMenu extends MusicBeatState
 
     override function create()
         {
-			DiscordClient.changePresence('In the Sound Test Menu', null);
+			
 
 			new FlxTimer().start(0.1, function(tmr:FlxTimer)
 				{
